@@ -4,6 +4,7 @@ import { Inter, Space_Grotesk } from 'next/font/google';
 import type { Metadata } from 'next';
 
 import './globals.css';
+import { ThemeProvider } from '@/context/ThemeProvider';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -22,7 +23,7 @@ export const metadata: Metadata = {
   description:
     'A community driven platform for asking and answering programming questions. Get help, share knowledge, and collaborate with developers from around the world. Explore topics in web development, mobile app development, algorithms, data structures, and more.',
   icons: {
-    icon: '/assests/images/site-logo.svg',
+    icon: '/assests/images/favicon.ico',
   },
 };
 
@@ -32,20 +33,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <ClerkProvider
-      appearance={{
-        elements: {
-          formButtonPrimary: 'primary-gradient',
-          footerActionLink: 'primary-text-gradient hover:text-primary-500',
-        },
-      }}
-    >
-      <html lang="en">
-        <h1 className="h1-bold">This is a piece of text</h1>
-        <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
-          {children}
-        </body>
-      </html>
-    </ClerkProvider>
+    <html lang="en">
+      <h1 className="h1-bold">This is a piece of text</h1>
+      <body className={`${inter.variable} ${spaceGrotesk.variable}`}>
+        <ClerkProvider
+          appearance={{
+            elements: {
+              formButtonPrimary: 'primary-gradient',
+              footerActionLink: 'primary-text-gradient hover:text-primary-500',
+            },
+          }}
+        >
+          <ThemeProvider>{children}</ThemeProvider>
+        </ClerkProvider>
+      </body>
+    </html>
   );
 }
